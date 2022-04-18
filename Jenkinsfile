@@ -1,7 +1,9 @@
 pipeline {
       environment {
-          dockerimagename = "oussama24/crud-front"
-          dockerImage = ""
+          dockerimagenamefront = "oussama24/crud-front"
+          dockerImagefront = ""
+          dockerimagenameback = "oussama24/crud-front"
+          dockerImageback = ""
       }
       agent any
       tools {maven "LocalMaven"}      
@@ -33,16 +35,29 @@ pipeline {
                         sh 'mvn clean package'
                   }
             }
-            stage('Release Docker Image') {
+            stage('Release Docker Image Front') {
                   environment {
                         registryCredential = "dockerhub_credentials"
                   }
                   steps {
-                        echo '**** Build Docker Image ****'
+                        echo '**** Build Docker Image Front ****'
                         script{
-                              dockerImage = docker.build dockerimagename
+                              dockerImagefront = docker.build dockerimagenamefront
                               docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) 
-                              {dockerImage.push("latest")}
+                              {dockerImagefront.push("latest")}
+                        }
+                  }
+            }
+             stage('Release Docker Image Back') {
+                  environment {
+                        registryCredential = "dockerhub_credentials"
+                  }
+                  steps {
+                        echo '**** Build Docker Image Back ****'
+                        script{
+                              dockerImageback = docker.build dockerimagenameback
+                              docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) 
+                              {dockerImageback.push("latest")}
                         }
                   }
             }
