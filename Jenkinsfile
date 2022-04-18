@@ -2,7 +2,6 @@ pipeline {
       environment {
           dockerimagename = "oussama24/crud-front"
           dockerImage = ""
-          registryCredential = "dockerhub_credentials"
       }
       agent any
       tools {maven "LocalMaven"}      
@@ -36,7 +35,7 @@ pipeline {
             }
             stage('Release Docker Image') {
                   environment {
-                        registryCredential = 'dockerhub'
+                        registryCredential = "dockerhub_credentials"
                   }
                   steps {
                         echo '**** Build Docker Image ****'
