@@ -1,6 +1,6 @@
 pipeline {
       environment {
-          dockerimagename = "mehdijebali/crud-back"
+          dockerimagename = "oussama24/crud-back"
           dockerImage = ""
       }
       agent any
@@ -16,10 +16,10 @@ pipeline {
             stage('Code Quality Check via SonarQube') {
                   steps {
                         script {
-                        def scannerHome = tool 'sonarqube';
-                              withSonarQubeEnv("sonarqube") {
-                              sh "${tool("sonarqube")}/bin/sonar-scanner \
-                              -Dsonar.projectKey=Backend \
+                        def scannerHome = tool 'SonarScanner';
+                              withSonarQubeEnv("sonarqube-server") {
+                              sh "${tool("SonarScanner")}/bin/sonar-scanner \
+                              -Dsonar.projectKey=tuto \
                               -Dsonar.sources=src \
                               -Dsonar.java.binaries=target \
                               -Dsonar.host.url=http://localhost:9000"
