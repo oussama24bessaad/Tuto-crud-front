@@ -13,20 +13,20 @@ pipeline {
                         echo '**** Starting Pipeline Job ****'
                   }
             }
-            stage('Code Quality Check via SonarQube') {
-                  steps {
-                        script {
-                        def scannerHome = tool 'SonarScanner';
-                              withSonarQubeEnv("sonarqube-server") {
-                              sh "${tool("SonarScanner")}/bin/sonar-scanner \
-                              -Dsonar.projectKey=tuto \
-                              -Dsonar.sources=src \
-                              -Dsonar.java.binaries=target \
-                              -Dsonar.host.url=http://localhost:9000"
-                              }
-                        }                  
-                  }
-            }                  
+//             stage('Code Quality Check via SonarQube') {
+//                   steps {
+//                         script {
+//                         def scannerHome = tool 'SonarScanner';
+//                               withSonarQubeEnv("sonarqube-server") {
+//                               sh "${tool("SonarScanner")}/bin/sonar-scanner \
+//                               -Dsonar.projectKey=tuto \
+//                               -Dsonar.sources=src \
+//                               -Dsonar.java.binaries=target \
+//                               -Dsonar.host.url=http://localhost:9000"
+//                               }
+//                         }                  
+//                   }
+//             }                  
             stage('Build Jar File') {
                   steps {
                         echo '**** Build jar file ****'
