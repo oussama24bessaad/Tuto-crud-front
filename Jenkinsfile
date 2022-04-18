@@ -2,7 +2,7 @@ pipeline {
       environment {
           dockerimagenamefront = "oussama24/crud-front"
           dockerImagefront = ""
-          dockerimagenameback = "oussama24/crud-front"
+          dockerimagenameback = "oussama24/crud-back"
           dockerImageback = ""
       }
       agent any
@@ -15,6 +15,12 @@ pipeline {
                         echo '**** Starting Pipeline Job ****'
                   }
             }
+            stage('Cloning Git') {
+            steps {
+                git 'https://github.com/oussama24bessaad/Tuto-crud-front'
+                git 'https://github.com/oussama24bessaad/Tuto-crud-back'
+            }
+        }
 //             stage('Code Quality Check via SonarQube') {
 //                   steps {
 //                         script {
