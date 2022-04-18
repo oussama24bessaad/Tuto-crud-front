@@ -1,6 +1,6 @@
 pipeline {
       environment {
-          dockerimagename = "oussama24/crud-back"
+          dockerimagename = "oussama24/crud-front"
           dockerImage = ""
       }
       agent any
@@ -46,11 +46,11 @@ pipeline {
                         }
                   }
             }
-            stage('Deploy to k8s') {
-                  steps {
-                        echo '**** Deploy Application ****'
-                        withCredentials([ string(credentialsId: 'k8s', variable: 'api_token') ]) { sh 'kubectl --token $api_token --server https://192.168.49.2:8443/ --insecure-skip-tls-verify=true apply -f ./K8s '}
-                  }
-            }          
+//             stage('Deploy to k8s') {
+//                   steps {
+//                         echo '**** Deploy Application ****'
+//                         withCredentials([ string(credentialsId: 'k8s', variable: 'api_token') ]) { sh 'kubectl --token $api_token --server https://192.168.49.2:8443/ --insecure-skip-tls-verify=true apply -f ./K8s '}
+//                   }
+//             }          
       }      
 }
